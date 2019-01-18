@@ -63,11 +63,10 @@ new_u_wind = np.zeros((26,90,144))
 for i in range(90):
 	for j in range(144):
 			f = interpolate.interp1d(press_coords[:-16,i,j], u_wind[0,:-16,i,j])
-			first = roundup(press_coords[0,i,j])
+			first = press_coords[0,i,j]
 			last = 138.99999857
 			new_press_coord = np.linspace(last, first, 25)[::-1]
-			new_press_coord = np.insert(new_press_coord, 0, press_coords[0,i,j])
-
 			new_u_wind[:,i,j] = f(new_press_coord)
-
-
+			
+# Next step is very similar to the find closest height stuff from the tracking algorithm
+# ORR interpolate 
