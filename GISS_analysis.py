@@ -54,19 +54,18 @@ for i in range(90):
 	for j in range(144):
 			press_coords[:,i,j] = (a * p0 + b * ps[0,i,j]) / 100.
 
-new_u_wind = np.zeros((40,90,144))
 
-first = roundup(press_coords[0,i,j])
-last = 150.
-new_press_coord = np.arange(last,first,25.)[::-1]
-new_press_coord = np.insert(new_press_coord, 0, press_coords[0,i,j])
+print(press_coords[:-16,0,0])
+print(press_coords[:-16,10,20])
+
+new_u_wind = np.zeros((26,90,144))
 
 for i in range(90):
 	for j in range(144):
-			f = interpolate.interp1d(press_coords[:,i,j], u_wind[0,:,i,j])
+			f = interpolate.interp1d(press_coords[:-16,i,j], u_wind[0,:-16,i,j])
 			first = roundup(press_coords[0,i,j])
-			last = 150.
-			new_press_coord = np.arange(last, first, 25.)[::-1]
+			last = 138.99999857
+			new_press_coord = np.linspace(last, first, 25)[::-1]
 			new_press_coord = np.insert(new_press_coord, 0, press_coords[0,i,j])
 
 			new_u_wind[:,i,j] = f(new_press_coord)
